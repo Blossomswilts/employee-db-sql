@@ -66,7 +66,7 @@ const viewDepartments = () => {
 }
 //View all roles
 const viewRoles = () => {
-    db.query('SELECT * FROM role', (err, results) => {
+    db.query('SELECT * FROM roles', (err, results) => {
         if (err) throw err;
         console.table(results);
         start();
@@ -88,7 +88,7 @@ const addDepartment = () => {
         message: 'What is the name of the department you would like to add?'
     })
         .then(answer => {
-            db.query('INSERT INTO department SET ?', { name: answer.department }, (err, results) => {
+            db.query('INSERT INTO department SET ?', { names: answer.department }, (err, results) => {
                 if (err) throw err;
                 console.log('Department added.');
                 start();
@@ -115,9 +115,9 @@ const addRole = () => {
         }
     ])
         .then(answer => {
-            db.query('INSERT INTO role SET ?', { title: answer.title, salary: answer.salary, department_id: answer.department_id }, (err, results) => {
+            db.query('INSERT INTO roles SET ?', { title: answer.title, salary: answer.salary, department_id: answer.department_id }, (err, results) => {
                 if (err) throw err;
-                console.log('Role added.');
+                console.log('Roles added.');
                 start();
             })
         })
@@ -147,7 +147,7 @@ const addEmployee = () => {
         }
     ])
         .then(answer => {
-            db.query('INSERT INTO employee SET ?', { first_name: answer.first_name, last_name: answer.last_name, role_id: answer.role_id, manager_id: answer.manager_id }, (err, results) => {
+            db.query('INSERT INTO employee SET ?', { first_name: answer.first_name, last_name: answer.last_name, roles_id: answer.roles_id, manager_id: answer.manager_id }, (err, results) => {
                 if (err) throw err;
                 console.log('Employee added.');
                 start();
@@ -163,13 +163,13 @@ const updateEmployeeRole = () => {
             message: 'What is the id of the employee you would like to update?'
         },
         {
-            name: 'role_id',
+            name: 'roles_id',
             type: 'input',
             message: 'What is the new role id of the employee you would like to update?'
         }
     ])
         .then(answer => {
-            db.query('UPDATE employee SET role_id = ? WHERE id = ?', [answer.role_id, answer.employee_id], (err, results) => {
+            db.query('UPDATE employee SET roles_id = ? WHERE id = ?', [answer.roles_id, answer.employee_id], (err, results) => {
                 if (err) throw err;
                 console.log('Employee updated.');
                 start();
