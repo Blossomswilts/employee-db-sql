@@ -23,7 +23,7 @@ const start = () => {
         name: 'action',
         type: 'list',
         message: 'What would you like to do?',
-        choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee', 'Exit']
+        choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee', 'Delete a role' , 'Delete a department', 'Delete an employee', 'Exit']
     })
         .then(answer => {
             switch (answer.action) {
@@ -47,6 +47,15 @@ const start = () => {
                     break;
                 case 'Update employee':
                     updateEmployeeRole();
+                    break;
+                case 'Delete a role':
+                    deleteRole();
+                    break;
+                case 'Delete a department':
+                    deleteDepartment();
+                    break;
+                case 'Delete an employee':
+                    deleteEmployee();
                     break;
                 case 'Exit':
                     db.end();
@@ -188,6 +197,53 @@ const updateEmployeeRole = () => {
             })
         })
 }
+
+//Delete a role
+const deleteRole = () => {
+    inquirer.prompt({
+        name: 'role_id',
+        type: 'input',
+        message: 'What is the id of the role you would like to delete?'
+    })
+        .then(answer => {
+            db.query('DELETE FROM roles WHERE id = ?', [answer.role_id], (err, results) => {
+                if (err) throw err;
+                console.log('Role deleted.');
+                start();
+            })
+        })
+}
+//Delete a department
+const deleteDepartment = () => {
+    inquirer.prompt({
+        name: 'department_id',
+        type: 'input',
+        message: 'What is the id of the department you would like to delete?'
+    })
+        .then(answer => {
+            db.query('DELETE FROM department WHERE id = ?', [answer.department_id], (err, results) => {
+                if (err) throw err;
+                console.log('Department deleted.');
+                start();
+            })
+        })
+}
+//Delete an employee
+const deleteEmployee = () => {
+    inquirer.prompt({
+        name: 'employee_id',
+        type: 'input',
+        message: 'What is the id of the employee you would like to delete?'
+    })
+        .then(answer => {
+            db.query('DELETE FROM employee WHERE id = ?', [answer.employee_id], (err, results) => {
+                if (err) throw err;
+                console.log('Employee deleted.');
+                start();
+            })
+        })
+}
+
 
 
 
