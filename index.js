@@ -85,7 +85,7 @@ const addDepartment = () => {
     inquirer.prompt({
         name: 'department',
         type: 'input',
-        message: 'What is the name of the department you would like to add?'
+        message: 'What is the name of the department you would like to add?',
     })
         .then(answer => {
             db.query('INSERT INTO department SET ?', { names: answer.department }, (err, results) => {
@@ -106,12 +106,24 @@ const addRole = () => {
         {
             name: 'salary',
             type: 'input',
-            message: 'What is the salary of the role you would like to add?'
+            message: 'What is the salary of the role you would like to add?',
+            validate: function (value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false || 'Please enter a valid salary.';
+            }
         },
         {
             name: 'department_id',
             type: 'input',
-            message: 'What is the department id of the role you would like to add?'
+            message: 'What is the department id of the role you would like to add?',
+            validate: function (value) {
+                if (isNaN(value) === false) {
+                    return true;
+                }
+                return false || 'Please enter a valid ID.';
+            }
         }
     ])
         .then(answer => {
@@ -143,7 +155,7 @@ const addEmployee = () => {
         {
             name: 'manager_id',
             type: 'input',
-            message: 'What is the manager id of the employee you would like to add?'
+            message: 'Who is the manager of the employee you would like to add, if any?'
         }
     ])
         .then(answer => {
