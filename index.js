@@ -155,8 +155,6 @@ const addRole = async () => {
 //Add an employee
 const addEmployee = async () => {
   const roleArray = await roleChoices();
-  //  await departmentChoices();
-
   const answer = await inquirer.prompt([
     {
       name: "first_name",
@@ -172,13 +170,13 @@ const addEmployee = async () => {
       name: "role_id",
       type: "list",
       choices: roleArray,
-      message: "What is the role id of the employee you would like to add?",
+      message: "Which role is the employee being added to?",
     },
     {
       name: "manager_id",
       type: "input",
       message:
-        "Who is the manager of the employee you would like to add, if any?",
+        "Who is the manager of the employee you would like to add, if any? Add by ID.",
     },
   ]);
   db.query(
@@ -192,9 +190,9 @@ const addEmployee = async () => {
     (err, results) => {
       if (err) throw err;
       console.log("Employee added.");
-      start();
     }
   );
+  start();
 };
 //Update an employee role
 const updateEmployeeRole = async () => {
@@ -228,8 +226,9 @@ const deleteRole = async () => {
   const roleArray = await roleChoices();
   const answer = await inquirer.prompt({
     name: "role_id",
-    type: "input",
-    message: "What is the id of the role you would like to delete?",
+    type: "list",
+    message: "Which role would you like to delete?",
+    choices: roleArray,
   });
   db.query(
     "DELETE FROM roles WHERE id = ?",
@@ -244,49 +243,50 @@ const deleteRole = async () => {
 //Delete a department
 const deleteDepartment = async () => {
   const departmentArray = await departmentChoices();
-  const answer = await inquirer
-    .prompt({
-      name: "department_id",
-      type: "input",
-      message: "What is the id of the department you would like to delete?",
-    })
-      db.query(
-        "DELETE FROM department WHERE id = ?",
-        [answer.department_id],
-        (err, results) => {
-          if (err) throw err;
-          console.log("Department deleted.");
-          start();
-        }
-      );
+  const answer = await inquirer.prompt({
+    name: "department_id",
+    type: "list",
+    message: "Which department would you like to delete?",
+    choices: departmentArray,
+  });
+  db.query(
+    "DELETE FROM department WHERE id = ?",
+    [answer.department_id],
+    (err, results) => {
+      if (err) throw err;
+      console.log("Department deleted.");
+      start();
+    }
+  );
 };
 //Delete an employee
 const deleteEmployee = async () => {
-  const answer = await inquirer
-    .prompt({
-      name: "employee_id",
-      type: "input",
-      message: "Please enter the id of the employee you would like to delete.",
-    })
-      db.query(
-        "DELETE FROM employee WHERE id = ?",
-        [answer.employee_id],
-        (err, results) => {
-          if (err) throw err;
-          console.log("Employee deleted.");
-          start();
-        }
-      );
+  const answer = await inquirer.prompt({
+    name: "employee_id",
+    type: "input",
+    message: "Please enter the id of the employee you would like to delete.",
+  });
+  db.query(
+    "DELETE FROM employee WHERE id = ?",
+    [answer.employee_id],
+    (err, results) => {
+      if (err) throw err;
+      console.log("Employee deleted.");
+      start();
+    }
+  );
 };
 
 //____________________________________Functions____________________________________________
-// utils promise
-
+//Brings a list of choices for roles
 const roleChoices = async () => {
   return (await db.query("SELECT id AS value, title AS name FROM roles"))[0];
 };
 
+//Brings a list of choices for departments
 const departmentChoices = async () => {
-  return (await db.query("SELECT id AS value, names AS name FROM department"))[0];
+  return (
+    await db.query("SELECT id AS value, names AS name FROM department")
+  )[0];
 };
 start();
