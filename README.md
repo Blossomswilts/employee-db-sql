@@ -23,6 +23,7 @@ You will need to run `npm install` which will install the following package depe
 In order to run the program, after obtaining all of the dependencies you will need to run;
 * `node index.js` : this will begin the program in your terminal, in which you will be able to navigate through the prompts to create, read, update, and delete employees, roles, and departments from the database.
 * Please note, that you will need to be aware of the employee's ids to update or delete them. To delete a department or role, you will need to be aware of the department or role's id.
+* In order to set a value to null for manager, you will need to leave the field blank and press enter.
 * Application link to github repository: [Note Taker](https://github.com/Blossomswilts/employee-db-sql)
 
 ## Contribution
@@ -36,7 +37,10 @@ If you would like to contribute to this project, and improve it in your own way(
 As a side note, when making changes, always merge or pull from the latest version to ensure you are working on the most up to date version of the application. 
 
 ## Screenshots
-
+This is what the start of the program looks like in the terminal.
+![init](https://github.com/Blossomswilts/employee-db-sql/assets/117021869/be5def18-9bf6-4b91-a4c6-711b9da9ef24)
+This is what the tables look like in the terminal.
+![dbview](https://github.com/Blossomswilts/employee-db-sql/assets/117021869/77c554c7-04ce-48aa-8579-ad5e813499d5)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

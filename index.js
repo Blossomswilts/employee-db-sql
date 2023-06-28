@@ -179,20 +179,14 @@ const addEmployee = async () => {
         "Who is the manager of the employee you would like to add, if any? Add by ID.",
     },
   ]);
-  db.query(
-    "INSERT INTO employee SET ?",
-    {
-      first_name: answer.first_name,
-      last_name: answer.last_name,
-      roles_id: answer.roles_title,
-      manager_id: answer.manager_id,
-    },
-    (err, results) => {
-      if (err) throw err;
-      console.log("Employee added.");
-    }
+  if (!answer.manager_id) {
+    answer.manager_id = null;
+  }
+  await db.query(
+    "INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES (?, ?, ?, ?)",
+    [answer.first_name, answer.last_name, answer.roles_title, answer.manager_id]
   );
-    start();
+  start();
 };
 //Update an employee role
 const updateEmployeeRole = async () => {
