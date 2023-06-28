@@ -167,7 +167,7 @@ const addEmployee = async () => {
       message: "What is the last name of the employee you would like to add?",
     },
     {
-      name: "role_id",
+      name: "roles_title",
       type: "list",
       choices: roleArray,
       message: "Which role is the employee being added to?",
@@ -184,7 +184,7 @@ const addEmployee = async () => {
     {
       first_name: answer.first_name,
       last_name: answer.last_name,
-      roles_id: answer.roles_id,
+      roles_id: answer.roles_title,
       manager_id: answer.manager_id,
     },
     (err, results) => {
@@ -192,7 +192,7 @@ const addEmployee = async () => {
       console.log("Employee added.");
     }
   );
-  start();
+    start();
 };
 //Update an employee role
 const updateEmployeeRole = async () => {
