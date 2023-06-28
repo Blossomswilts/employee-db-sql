@@ -102,9 +102,9 @@ const addDepartment = async () => {
         (err, results) => {
           if (err) throw err;
           console.log("Department added.");
-          start();
         }
       );
+      start();
     });
 };
 //Add a role
@@ -148,9 +148,9 @@ const addRole = async () => {
     (err, results) => {
       if (err) throw err;
       console.log("Roles added.");
-      start();
     }
   );
+  start();
 };
 //Add an employee
 const addEmployee = async () => {
@@ -216,9 +216,9 @@ const updateEmployeeRole = async () => {
     (err, results) => {
       if (err) throw err;
       console.log("Employee updated.");
-      start();
     }
   );
+  start();
 };
 
 //Delete a role
@@ -236,9 +236,9 @@ const deleteRole = async () => {
     (err, results) => {
       if (err) throw err;
       console.log("Role deleted.");
-      start();
     }
   );
+  start();
 };
 //Delete a department
 const deleteDepartment = async () => {
@@ -255,9 +255,9 @@ const deleteDepartment = async () => {
     (err, results) => {
       if (err) throw err;
       console.log("Department deleted.");
-      start();
     }
   );
+  start();
 };
 //Delete an employee
 const deleteEmployee = async () => {
@@ -272,9 +272,9 @@ const deleteEmployee = async () => {
     (err, results) => {
       if (err) throw err;
       console.log("Employee deleted.");
-      start();
     }
   );
+  start();
 };
 
 //____________________________________Functions____________________________________________
