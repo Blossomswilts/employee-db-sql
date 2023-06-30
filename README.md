@@ -42,6 +42,8 @@ This is what the start of the program looks like in the terminal.
 This is what the tables look like in the terminal.
 ![dbview](https://github.com/Blossomswilts/employee-db-sql/assets/117021869/77c554c7-04ce-48aa-8579-ad5e813499d5)
 
+Video Walk-Through: [Employee Database](https://drive.google.com/file/d/1Fjr4fxw1wNP1F8xKelHm0sIqScZ566ge/view)
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
